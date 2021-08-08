@@ -87,5 +87,14 @@ RSpec.describe 'Merchants dashboard index page' do
         expect(@items[0].name).to appear_before(@items[1].name)
       end
     end
+
+    describe "discounts" do
+
+      it "links to discounts index" do
+        click_link "View All My Discounts"
+
+        expect(current_path).to eq("merchants/#{@merchant_1.id}/discounts")
+      end
+    end
   end
 end
