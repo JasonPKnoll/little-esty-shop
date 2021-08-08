@@ -93,7 +93,7 @@ RSpec.describe 'Merchants dashboard index page' do
       it "links to discounts index" do
         click_link "View All My Discounts"
 
-        expect(current_path).to eq("merchants/#{@merchant_1.id}/discounts")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
       end
     end
   end
