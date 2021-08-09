@@ -1,11 +1,14 @@
 <h1><%= @merchant.name %>'s Discounts</h1>
+<p><%= flash[:success] %></p>
 
+<br>
+  <%= link_to "Create Discount", new_merchant_discount_path(@merchant.id) %>
 <br>
 
 <h2><% @merchant.discounts.each do |discount| %> </h2>
   <div id="discount-<%=discount.id%>">
   <p><b>
-  <%= link_to "#{(discount.percentage * 100)}% Discount", merchant_discount_path(@merchant.id, discount.id) %>
+  <%= link_to "#{(discount.percentage)}% Discount", merchant_discount_path(@merchant.id, discount.id) %>
   for bulk orders of
   <%= discount.threshold %> items
   </b></p>
