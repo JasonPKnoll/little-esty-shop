@@ -173,7 +173,7 @@ RSpec.describe GithubService do
           "site_admin": false,
           "contributions": 1
           }]'
-          
+
           allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
           allow_any_instance_of(Faraday::Response).to receive(:body).and_return(@response)
         end
@@ -229,7 +229,7 @@ RSpec.describe GithubService do
         end
 
         describe 'pull requests' do
-          it 'can show the number pull requests' do 
+          it 'can show the number pull requests' do
             service = GithubService.new
             pulls = '["pull_requests_1", "pull_requests_2", "pull_requests_3"]'
 
@@ -254,7 +254,7 @@ RSpec.describe GithubService do
 
             allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
             allow_any_instance_of(Faraday::Response).to receive(:body).and_return(repo)
-          
+
             expect(service.repo_name).to eq('little-esty-shop')
           end
         end

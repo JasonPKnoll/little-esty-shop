@@ -88,4 +88,18 @@ RSpec.describe 'Merchants dashboard index page' do
       end
     end
   end
+
+  describe 'merchants discount index page' do
+    it 'displays a link to direct user to the merchant discounts index page' do
+      merchant = create(:merchant)
+
+      visit "/merchants/#{merchant.id}/dashboard"
+
+      expect(page).to have_link("View Discounts")
+
+      click_link "View Discounts"
+
+      expect(current_path).to eq(merchant_discounts_path(merchant.id))
+    end
+  end
 end

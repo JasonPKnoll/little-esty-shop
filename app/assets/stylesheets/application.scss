@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+  background-image: url("background.jpeg");
+  background-attachment: fixed;
+   background-size: auto 100%;
+   background-position: center;
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+
+#right-side-bar{
+width: 20%;
+float:right;;
+    margin-top:-40px;
+}

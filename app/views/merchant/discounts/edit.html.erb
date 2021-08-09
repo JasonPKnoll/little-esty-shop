@@ -1,0 +1,3 @@
+<h1>Edit Discount</h1>
+
+<%= render partial: 'form', locals: { path: "/merchants/#{@merchant.id}/discounts/#{@discount.id}", method: :patch, button_text: 'Edit Discount', percentage_value: @discount.percentage, quantity_value: @discount.quantity_threshold } %>
