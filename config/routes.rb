@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :merchants, module: :merchant do
     # get '/dashboard', to: 'dashboard#show', as: 'merchant_dashboard'
-    resources :discounts, only: [:index, :show]
+    resources :discounts
     resources :dashboard, only: [:index]
     resources :items
     resources :invoices
