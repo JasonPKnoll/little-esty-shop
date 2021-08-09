@@ -70,5 +70,13 @@ RSpec.describe 'Merchant discounts index page' do
 
       expect(page).to have_content("Success: New discount has been created!")
     end
+
+    it "can delete each discount" do
+      visit "merchants/#{@merchant_1.id}/discounts"
+      
+      within "#discount-#{@discounts.first.id}" do
+        click_link "Delete this discount"
+      end
+    end
   end
 end
