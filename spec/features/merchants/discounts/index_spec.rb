@@ -32,5 +32,25 @@ RSpec.describe 'Merchant discounts index page' do
 
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/#{@discounts.first.id}")
     end
+
+    it "has a link to create a new discount" do
+      click_link "Create Discount"
+
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/new")
+    end
+
+    it "can create a new discount" do
+      click_link "Create Discount"
+
+      fill_in :percentage, with: 90
+      fill_in :quantity, with: 100
+
+      click_button "Submit"
+
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
+
+      expect(page).to have_content(90)
+      expect(page).to have_content(100)
+    end
   end
 end
