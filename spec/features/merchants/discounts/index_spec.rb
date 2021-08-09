@@ -73,10 +73,26 @@ RSpec.describe 'Merchant discounts index page' do
 
     it "can delete each discount" do
       visit "merchants/#{@merchant_1.id}/discounts"
-      
+
       within "#discount-#{@discounts.first.id}" do
         click_link "Delete this discount"
       end
+
+      within "#discount-#{@discounts.second.id}" do
+        click_link "Delete this discount"
+      end
+
+      within "#discount-#{@discounts.third.id}" do
+        click_link "Delete this discount"
+      end
+
+      expect(page).to_not  have_content(" #{@discounts.first.percentage} ")
+      expect(page).to_not  have_content(" #{@discounts.second.percentage} ")
+      expect(page).to_not  have_content(" #{@discounts.third.percentage} ")
+
+      expect(page).to_not  have_content(" #{@discounts.first.threshold} ")
+      expect(page).to_not  have_content(" #{@discounts.second.threshold} ")
+      expect(page).to_not  have_content(" #{@discounts.third.threshold} ")
     end
   end
 end
