@@ -6,5 +6,4 @@ RSpec.describe Discount do
   end
 
   describe 'validations'
-
 end
