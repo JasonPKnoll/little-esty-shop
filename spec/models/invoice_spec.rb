@@ -25,6 +25,7 @@ RSpec.describe Invoice do
     @invoice5 = create(:invoice, customer_id: @customer2.id)
     @invoice6 = create(:invoice, customer_id: @customer2.id)
     @invoice7 = create(:invoice, customer_id: @customer2.id)
+    @invoice8 = create(:invoice, customer_id: @customer2.id)
 
 
     @merchant = create(:merchant)
@@ -43,6 +44,17 @@ RSpec.describe Invoice do
     @invoice_item6 = create(:invoice_item, item_id: @item3.id, invoice_id: @invoice7.id, status: 2, quantity: 5, unit_price: 10)
     @invoice_item6 = create(:invoice_item, item_id: @item4.id, invoice_id: @invoice7.id, status: 2, quantity: 5, unit_price: 10)
 
+    @invoice_item7 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice8.id, status: 2, quantity: 50, unit_price: 10)
+    @invoice_item7 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice8.id, status: 2, quantity: 100, unit_price: 10)
+    @invoice_item7 = create(:invoice_item, item_id: @item3.id, invoice_id: @invoice8.id, status: 2, quantity: 10, unit_price: 10)
+
+
+    @discount_1 = create(:discount, percentage: 20.0, threshold: 25, merchant_id: @merchant.id)
+    @discount_2 = create(:discount, percentage: 25.0, threshold: 50, merchant_id: @merchant.id)
+    @discount_3 = create(:discount, percentage: 30.0, threshold: 75, merchant_id: @merchant.id)
+    @discount_4 = create(:discount, percentage: 45.0, threshold: 100, merchant_id: @merchant.id)
+    @discount_5 = create(:discount, percentage: 50.0, threshold: 125, merchant_id: @merchant.id)
+
 
   end
 
@@ -57,6 +69,10 @@ RSpec.describe Invoice do
     it '::total_revenue' do
 
       expect(@invoice7.total_revenue).to eq(100)
+    end
+
+    it "calculates total revenue with discounts applied" do
+      expect(@invoice8.total_discounted_revenue).to eq(1025)
     end
   end
 end
