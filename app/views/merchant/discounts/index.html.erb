@@ -1,6 +1,14 @@
 <h1><%= @merchant.name %>'s Discounts</h1>
 <p><%= flash[:success] %></p>
 
+<section>
+  <h2>Next 3 Holidays</h2>
+  <% @holidays.next_three_days.each do |holiday| %>
+    <%= holiday[0] %>
+    is coming up on <%= holiday[1] %> <br>
+  <% end %>
+</section>
+
 <br>
   <%= link_to "Create Discount", new_merchant_discount_path(@merchant.id) %>
 <br>
