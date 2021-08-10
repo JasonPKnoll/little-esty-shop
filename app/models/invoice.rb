@@ -19,7 +19,6 @@ class Invoice < ApplicationRecord
   end
 
   def total_discounted_revenue
-    require "pry"; binding.pry
     discounts = []
     invoice_items.each do |invoice_item|
       if invoice_item.max_discount != nil
