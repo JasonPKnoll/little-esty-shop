@@ -15,6 +15,18 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.sum('quantity * unit_price')      
+    invoice_items.sum('quantity * unit_price')
+  end
+
+  def total_discounted_revenue
+    require "pry"; binding.pry
+    discounts = []
+    invoice_items.each do |invoice_item|
+      if invoice_item.max_discount != nil
+        x = invoice_item.unit_price * (invoice_item.max_discount.percentage / 100)
+        discounts << x * invoice_item.quantity
+      end
+    end
+    (total_revenue - discounts.sum).to_i
   end
 end
