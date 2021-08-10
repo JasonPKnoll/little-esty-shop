@@ -71,13 +71,33 @@ RSpec.describe 'Merchants invoices show page' do
       @discounts << create(:discount, percentage: 50.0, threshold: 200, merchant_id: @merchant_1.id)
 
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoices[0].id}"
-      require "pry"; binding.pry
 
       #items
       #quantity: 10 - unit_price: 20
       #quantity: 500 - unit_price: 5000
       #quantity: 100 - unit_price: 1000
       expect(page).to have_content("$13,302.00")
+    end
+
+    it "has links to each discount show page" do
+      @items << create(:item, merchant_id: @merchant_1.id, unit_price: 5000)
+      @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices[0].id, status: 1, quantity: 500, unit_price: @items.last.unit_price)
+
+      @items << create(:item, merchant_id: @merchant_1.id, unit_price: 1000)
+      @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices[0].id, status: 1, quantity: 100, unit_price: @items.last.unit_price)
+
+      @discounts << create(:discount, percentage: 20.0, threshold: 50, merchant_id: @merchant_1.id)
+      @discounts << create(:discount, percentage: 50.0, threshold: 200, merchant_id: @merchant_1.id)
+
+
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoices[0].id}"
+
+      within("#id-#{@invoice_items[3].id}") do
+        expect(page).to have_content("Discount Applied")
+      end
+      within("#id-#{@invoice_items[2].id}") do
+        expect(page).to have_content("Discount Applied")
+      end
     end
   end
 end
