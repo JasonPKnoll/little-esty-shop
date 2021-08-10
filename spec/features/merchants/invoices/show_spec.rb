@@ -99,5 +99,25 @@ RSpec.describe 'Merchants invoices show page' do
         expect(page).to have_content("Discount Applied")
       end
     end
+
+    it "links to that discounts show page" do
+      @items << create(:item, merchant_id: @merchant_1.id, unit_price: 5000)
+      @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices[0].id, status: 1, quantity: 500, unit_price: @items.last.unit_price)
+
+      @items << create(:item, merchant_id: @merchant_1.id, unit_price: 1000)
+      @invoice_items << create(:invoice_item, item_id: @items.last.id, invoice_id: @invoices[0].id, status: 1, quantity: 100, unit_price: @items.last.unit_price)
+
+      @discounts << create(:discount, percentage: 20.0, threshold: 50, merchant_id: @merchant_1.id)
+      @discounts << create(:discount, percentage: 50.0, threshold: 200, merchant_id: @merchant_1.id)
+
+
+      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoices[0].id}"
+
+      within("#id-#{@invoice_items[3].id}") do
+        click_link "Discount Applied"
+
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/#{@discounts[0].id}")
+      end
+    end
   end
 end
