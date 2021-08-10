@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :service
 
-  def welcome
-  end
-
   def service
     service = GithubService.new
     @contributors = service.contributors

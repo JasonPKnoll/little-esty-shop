@@ -29,12 +29,12 @@ RSpec.describe InvoiceItem do
     it { should validate_presence_of(:unit_price) }
     it { should validate_presence_of(:quantity) }
 
-    describe 'class methods' do
-      describe '#total_revenue' do
-        it 'can calculate the total revenue on an invoice' do
-          expect(InvoiceItem.total_revenue).to eq(10000)
-        end
+  describe 'class methods' do
+    describe '#total_revenue' do
+      it 'can calculate the total revenue on an invoice' do
+        expect(InvoiceItem.total_revenue).to eq(10000)
       end
     end
   end
+end
 end

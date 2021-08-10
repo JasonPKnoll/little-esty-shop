@@ -1,49 +1,60 @@
 <br><br>
 
-<div class="footer">
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Contributors
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <% if @contributors.is_a?(String) %>
+        <%= @contributors %></p>
+      <% elsif @contributors.is_a?(Array) %>
+      <% @contributors.each do |contributor| %>
+        <%= contributor  %>
+        <% end %>
+      <% end %></div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Number of Commits
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <% if @commits.is_a?(String) %>
+          <p class="card-text"><%= @commits %></p>
+        <% elsif @commits.is_a?(Hash) %>
+        <% @commits.each do |contributor, commits| %>
+          <p class="card-text"><%= contributor  %> Commits: <%= commits %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+      Number of Merged Pull Requests
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"><%= @pull_requests %></div>
+    </div>
+  </div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingThree">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
     Repo Name
-  </a>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-    Contributors
-  </button>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-    Number of Commits
-  </button>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
-    Number of Merged Pull Requests
-  </button>
-</p>
-<div class="collapse" id="collapseExample1">
-  <div class="card card-body">
-    <p><%= @repo_name %></p>
-  </div>
-</div>
-<div class="collapse" id="collapseExample2">
-  <div class="card card-body">
-    <% if @contributors.is_a?(String) %>
-        <li><%= @contributors  %></li>
-    <% elsif @contributors.is_a?(Array) %>
-    <% @contributors.each do |contributor| %>
-      <li><%= contributor  %></li>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<div class="collapse" id="collapseExample3">
-  <div class="card card-body">
-    <% if @commits.is_a?(String) %>
-      <li><%= @commits %></li>
-    <% elsif @commits.is_a?(Hash) %>
-    <% @commits.each do |contributor, commits| %>
-      <li><%= contributor  %> Commits: <%= commits %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<div class="collapse" id="collapseExample4">
-  <div class="card card-body">
-  <li><%= @pull_requests %></li>
+    </button>
+  </h2>
+  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body"><%= @repo_name %></div>
   </div>
 </div>
 </div>

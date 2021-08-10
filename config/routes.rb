@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/', to: 'application#welcome'
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :merchants, module: :merchant do
     # get '/dashboard', to: 'dashboard#show', as: 'merchant_dashboard'
@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     resources :items
     resources :invoices
     resources :invoice_items, only: [:update]
-    resources :discounts
   end
 
   resources :admin, only: [:index]

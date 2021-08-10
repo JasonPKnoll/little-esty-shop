@@ -8,6 +8,6 @@ class InvoiceItem < ApplicationRecord
   enum status: {pending: 0, packaged: 1, shipped: 2}
 
   def self.total_revenue
-    sum("unit_price * quantity")
+    sum("invoice_items.unit_price * invoice_items.quantity")
   end
 end
