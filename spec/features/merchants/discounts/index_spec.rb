@@ -94,5 +94,68 @@ RSpec.describe 'Merchant discounts index page' do
       expect(page).to_not  have_content(" #{@discounts.second.threshold} ")
       expect(page).to_not  have_content(" #{@discounts.third.threshold} ")
     end
+
+    describe "Holidays" do
+      # before(:each, :holiday) do
+      #   @service = HolidayService.new
+      #
+      #   @response =
+      #   '[{
+      #   "date": "2021-09-06",
+      #    "localName": "Labor Day",
+      #    "name": "Labour Day",
+      #    "countryCode": "US",
+      #    "types": [
+      #    "Public"]
+      #   },
+      #    {
+      #      "date": "2021-10-11",
+      #    "localName": "Columbus Day",
+      #    "name": "Columbus Day",
+      #    "countryCode": "US",
+      #    "types": [
+      #    "Public"]
+      #   },
+      #    {
+      #      "date": "2021-11-11",
+      #    "localName": "Veterans Day",
+      #    "name": "Veterans Day",
+      #    "countryCode": "US",
+      #    "types": [
+      #    "Public"]
+      #   },
+      #    {
+      #    "date": "2021-11-25",
+      #    "localName": "Thanksgiving Day",
+      #    "name": "Thanksgiving Day",
+      #    "countryCode": "US",
+      #    "fixed": false,
+      #    "global": true,
+      #    "counties": null,
+      #    "launchYear": 1863,
+      #    "types": [
+      #    "Public"]
+      #    }]'
+      #
+      #   allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
+      #   allow_any_instance_of(Faraday::Response).to receive(:body).and_return(@response)
+      # end
+
+      it "shows the Upcoming holidays names", :holiday do
+        visit "merchants/#{@merchant_1.id}/discounts"
+
+        expect(page).to have_content("Labor Day")
+        expect(page).to have_content("Columbus Day")
+        expect(page).to have_content("Veterans Day")
+      end
+
+      it "shows the Upcoming holidays dates", :holiday do
+        visit "merchants/#{@merchant_1.id}/discounts"
+
+        expect(page).to have_content("2021-09-06")
+        expect(page).to have_content("2021-10-11")
+        expect(page).to have_content("2021-11-11")
+      end
+    end
   end
 end
