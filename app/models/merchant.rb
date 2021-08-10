@@ -1,6 +1,5 @@
 class Merchant < ApplicationRecord
   has_many :items
-  has_many :discounts, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -19,6 +18,7 @@ class Merchant < ApplicationRecord
   def disabled_items
     items.where(enabled: 1)
   end
+
 
   def best_revenue_day
     items.joins(:transactions)
@@ -53,3 +53,4 @@ class Merchant < ApplicationRecord
     .first
   end
 end
+
