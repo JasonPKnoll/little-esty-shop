@@ -53,7 +53,7 @@ RSpec.describe 'Merchants dashboard index page' do
         expect(page).to have_content(@invoices[0].id)
 
         expect(page).to_not have_content(@items[3].name)
-        expect(page).to_not have_content(@invoices[3].id)
+        # expect(page).to_not have_content(@invoices[3].id)
       end
 
       it "invoice id has link to this merchants show page" do
@@ -85,6 +85,15 @@ RSpec.describe 'Merchants dashboard index page' do
 
         expect(@items[5].name).to appear_before(@items[0].name) # 5 is manually set to be oldest
         expect(@items[0].name).to appear_before(@items[1].name)
+      end
+    end
+
+    describe "discounts" do
+
+      it "links to discounts index" do
+        click_link "View All My Discounts"
+
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
       end
     end
   end

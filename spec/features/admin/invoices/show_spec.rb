@@ -13,8 +13,8 @@ RSpec.describe 'Admin Invoice Show Page' do
 
     @invoice_item1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice.id, status: 0)
     @invoice_item2 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice.id, status: 0)
-    @invoice_item3 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice.id, status: 1)
-    @invoice_item4 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice.id, status: 1)
+    @invoice_item3 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice.id, status: 1, unit_price: 100, quantity: 500)
+    @invoice_item4 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice.id, status: 1, unit_price: 100, quantity: 100)
     @invoice_item5 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice.id, status: 2)
     @invoice_item6 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice.id, status: 0)
 
@@ -26,6 +26,10 @@ RSpec.describe 'Admin Invoice Show Page' do
     @transaction5 = create(:transaction, invoice_id: @invoice.id)
     @transaction6 = create(:transaction, invoice_id: @invoice.id)
     @transaction7 = create(:transaction, invoice_id: @invoice.id)
+
+    @discount1 = create(:discount, merchant_id: @merchant.id, percentage: 50, threshold: 300)
+    @discount2 = create(:discount, merchant_id: @merchant.id, percentage: 25, threshold: 100)
+
 
     visit admin_invoice_path(@invoice.id)
   end
@@ -72,6 +76,13 @@ RSpec.describe 'Admin Invoice Show Page' do
 
       click_on "Submit"
       expect(page).to have_content('Invoice Status: completed')
+    end
+  end
+
+  describe "Admin Invoice Show Page: Show revenues" do
+    it "shows revenue from this invocies with bulk discounts" do
+
+      expect(page).to have_content("Total Revenue with Discounts: $#{(@invoice.total_discounted_revenue.to_f / 100)}")
     end
   end
 end

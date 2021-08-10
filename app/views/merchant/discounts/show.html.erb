@@ -1,0 +1,8 @@
+<h1><%= @merchant.name %>'s Discount</h1>
+
+<p><b> <%= link_to "Edit this discount", edit_merchant_discount_path(@merchant.id, @discount.id) %> </b></p>
+
+<p><b>
+  <%= @discount.percentage %>
+  <%= @discount.threshold %>
+</b></p>

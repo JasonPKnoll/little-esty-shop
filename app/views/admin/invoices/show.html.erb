@@ -18,6 +18,10 @@
   <h1>Total Revenue: <%= number_to_currency(@invoice.total_revenue.to_f / 100) %></h1>
 </section>
 
+<section id='totalrev_discounts'>
+  <h1>Total Revenue with Discounts: <%= number_to_currency(@invoice.total_discounted_revenue.to_f / 100) %></h1>
+</section>
+
 <section id='status'>
   <p>Invoice Status: <%= @invoice.status %></p>
   <%= form_with url: admin_invoice_path(@invoice.id), model: @invoice, method: :patch, local: true do |f| %>
