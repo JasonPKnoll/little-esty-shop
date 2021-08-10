@@ -51,7 +51,7 @@ RSpec.describe InvoiceItem do
         invoice_item_4 = create(:invoice_item, invoice_id: invoice.id, item_id: item_1.id, quantity: 99)
         invoice_item_5 = create(:invoice_item, invoice_id: invoice.id, item_id: item_1.id, quantity: 150)
 
-        discount_1 = create(:discount, percentage: 20.0., threshold: 25, merchant_id: merchant.id)
+        discount_1 = create(:discount, percentage: 20.0, threshold: 25, merchant_id: merchant.id)
         discount_2 = create(:discount, percentage: 25.0, threshold: 50, merchant_id: merchant.id)
         discount_3 = create(:discount, percentage: 30.0, threshold: 75, merchant_id: merchant.id)
         discount_4 = create(:discount, percentage: 45.0, threshold: 100, merchant_id: merchant.id)
